@@ -16,6 +16,10 @@ class FIFOCache(BaseCaching):
     """
 
     def __init__(self):
+        """
+        Initiliaze
+        """
+
         super().__init__()
         self.cache_data = OrderedDict()
 

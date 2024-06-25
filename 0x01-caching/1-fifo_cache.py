@@ -41,8 +41,7 @@ class FIFOCache(BaseCaching):
             len(self.cache_data.keys()) >= BaseCaching.MAX_ITEMS
             and key not in self.cache_data
         ):
-            oldest_key = next(iter(self.cache_data))
-            del self.cache_data[oldest_key]
+            oldest_key, _ = self.cache_data.popitem(last=False)
             print('DISCARD:', oldest_key)
 
         self.cache_data[key] = item

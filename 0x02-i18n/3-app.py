@@ -24,7 +24,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     Get the best matching language locale based on the user's preferences.
 
@@ -36,7 +36,7 @@ def get_locale():
 
 
 @app.route('/')
-def welcome():
+def welcome() -> str:
     """
     Renders the welcome page.
 

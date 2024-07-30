@@ -20,6 +20,7 @@ class Config:
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.url_map.strict_slashes = False
 babel = Babel(app)
 
 users = {
@@ -38,9 +39,6 @@ def get_locale():
     Returns:
         str: The best matching language locale.
     """
-
-    if g.user and g.user['locale'] in app.config['LANGUAGES']:
-        return g.user['locale']
 
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:

@@ -81,7 +81,7 @@ def before_request():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """
     Get the timezone based on the user's preference
     or the provided timezone argument.

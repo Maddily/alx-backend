@@ -5,7 +5,7 @@ const jobData = {
   message: 'Hello, this is a test!',
 };
 
-const queue = createQueue();
+const queue = createQueue({ name: 'push_notification_code' });
 const job = queue.create('push_notification_code', jobData).save((error) => {
   if (error) {
     console.error(`Error creating job: ${error}`);

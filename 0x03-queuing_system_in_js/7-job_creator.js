@@ -49,7 +49,7 @@ const jobs = [
 
 const queue = createQueue({ name: 'push_notification_code_2' });
 
-for (const jobData in jobs) {
+for (const jobData of jobs) {
   const job = queue
     .create('push_notification_code_2', jobData)
     .save((error) => {

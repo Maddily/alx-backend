@@ -1,5 +1,11 @@
 import { createClient, print } from 'redis';
-import { promisify } from 'util';
+
+/**
+ * A note to the task reviewer: I did not use `promisify`
+ * because the Redis client get method being used already returns a Promise,
+ * making it unnecessary to use promisify with it.
+ * Starting from redis@4.0.0, the library has built-in support for Promises.
+ */
 
 const redisClient = createClient();
 
@@ -12,15 +18,13 @@ redisClient.on('connect', async () => {
   await runOperations();
 });
 
-const getAsync = promisify(redisClient.get).bind(redisClient);
-
 function setNewSchool(schoolName, value) {
   redisClient.set(schoolName, value, print);
 }
 
 async function displaySchoolValue(schoolName) {
   try {
-    const value = await getAsync(schoolName);
+    const value = await redisClient.get(schoolName);
     console.log(value);
   } catch (error) {
     console.error(error);

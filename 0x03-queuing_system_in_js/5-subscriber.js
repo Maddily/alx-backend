@@ -10,14 +10,14 @@ redisClient.on('error', (error) => {
   console.log(`Redis client not connected to the server: ${error}`);
 });
 
-redisClient.subscribe('holberton school channel');
-redisClient.connect();
+(async () => await redisClient.connect())();
+(async () => {
+  await redisClient.subscribe('holberton school channel', async (message) => {
+    console.log(message);
 
-redisClient.on('message', (channel, message) => {
-  console.log(message);
-
-  if (message === 'KILL_SERVER') {
-    redisClient.unsubscribe(channel);
-    redisClient.quit();
-  }
-});
+    if (message === 'KILL_SERVER') {
+      await redisClient.unsubscribe('holberton school channel');
+      await redisClient.quit();
+    }
+  });
+})();
